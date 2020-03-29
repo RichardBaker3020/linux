@@ -1,11 +1,11 @@
 # change touchpad speed through command.
 
-#### 1.list all device id
+### 1.list all device id
 ```
 xinput --list
 ```
 
-#### 2.list particular device setting options
+### 2.list particular device setting options
 ```
 xinput --list-props 14
 
@@ -18,13 +18,13 @@ Device 'Elan Touchpad':
 
 ```
 
-##### 3.increase the trackpad tracking speed ( increase it by 4 times )
+### 3.increase the trackpad tracking speed ( increase it by 4 times )
 ```
 xinput --set-prop 14 171 4.000000, 0.000000, 0.000000, 0.000000, 4.000000, 0.000000, 0.000000, 0.000000, 1.000000
 ```
 
-#### 4.decrease scrolling speed
+### 4.decrease scrolling speed
 ```
     Synaptics Scrolling Distance (301):	-75, 75
-xinput --set-prop 10 301 -75, 75
+    xinput --set-prop 10 301 -75, 75
 ```
