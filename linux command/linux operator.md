@@ -5,6 +5,12 @@ linux operator
 ---
 
 1. The right side of **&&** will only be evaluated if the exit status of the left side is zero (i.e. true). (which means success)
+ > ◇进程退出码
+
+    任何一个进程退出的时候，都对应某个【整数类型】的“退出码”。
+    按照 POSIX 系统（UNIX ＆ Linux）的传统惯例——
+    当“退出码”为【零】，表示“成功 or 正常状态”；
+    当“退出码”【非零】，表示“失败 or 异常状态”。
 2. **||** evaluate the right side only if the left side exit status is non-zero (i.e. false).
 
 ```
@@ -41,7 +47,9 @@ rm -r !(*.html) :delete all files except for html type
 
 |
 ---
-This PIPE operator is very useful where the output of first command acts as an input to the second command. 
+This PIPE operator is very useful where the output of first command acts as an input to the second command.
+> Pipes
+    Pipes are used to redirect a stream from one program to another. When a program’s standard output is sent to another through a pipe, the first program’s data, which is received by the second program, will not be displayed on the terminal. Only the filtered data returned by the second program will be displayed.
 ```
 find . *python* | less
 ```
@@ -57,4 +65,30 @@ to indicate the command precedence
 ---
 to concatenate several lines into one command, used to handle long commands
 
-```
+/
+---
+root directory
+
+.
+---
+current directory ,  and **..** means parent directory
+
+~
+---
+home directory
+
+$
+---
+used to show variable with echo command
+`echo $PATH`
+to create shell variable and assign value to it:
+`variable='this is string'`
+show string from specified position:
+`echo ${string:1}` `echo ${string:1:3} (start from 1st character and up to next show three characters totally)`
+**$()**
+similar to (``), used to invoke a subshell and it output is then placed in the original position.
+`echo $(date)` (the output of `date` command is the current date)
+
+wild card
+---
+**?** stand for one character, __*__ stand for any sequence of characters, [235] means at least match one of these number

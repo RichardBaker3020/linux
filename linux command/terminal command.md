@@ -19,14 +19,18 @@ tac 反向显示文件
 cat .bashrc | less : show file content using scroll 
 ```
 
-**cp**
+cp
 ---
 ```
 目标文件存在时，会询问是否覆盖 cp -i 
 
 一个目录及其档案复制到另一个目录下 cp -a 
 ```
- 
+
+touch
+---
+`touch filename` used to create empty file
+`touch -a filename` use to update access time without changing the file
 **rm**
 ---
 ```
@@ -141,10 +145,17 @@ ps -A | grep <processname>
 
 Kill 
 ---
- 
 ```
-kill PID 
+kill PID
+killall prcname 
 ```
+
+jobs
+---
+show all backgroud process with id
+> fg %(id) :bring process back to foregroud
+> bg
+
 
 alias
 ---
@@ -188,7 +199,7 @@ find . type f -name <name>: means only show content whose type is file
 dot '.' means current folders
 
 ```
-grep
+grep(负责过滤的命令)
 ---
 ```
 grep 'import' new.py :Search any line that contains the word in filename (with -i option search case-insensitive)
@@ -272,8 +283,26 @@ Z: Zombie
 Press the Q key to exit from top.
 ```
 
+wget
+---
+wget is a free utility for non-interactive download of files from the web. It supports HTTP, HTTPS, and FTP protocols, as well as retrieval through HTTP proxies.
+```
+'wget http://website.com/files/file.zip' : download the file from web
+'wget www.pincong.rocks' :download html into index.html file
+'wget url -O <filename> : download the file and change its name
+'wget -o download.log url' : log output to a file
+'wget -r url' : download a html page and all its links' htmls. (use -l option to specify the recursion level)
 
+```
 
+export
+---
+In general, the export command marks an environment variable to be exported with any newly forked child processes and thus it allows a child process to inherit all marked variables. 
+detailed instructions [export - LinuxConfig.org](https://linuxconfig.org/learning-linux-commands-export)
+> use **export** to set temporary environment variable:
+`export PATH=$PATH:/home/patrick/clash` or `export PATH=$PATH:$(pwd)`(set env for current dir)
+and then you can run executable by command in specified directory.
 
-
-
+source
+---
+source is used to read and execute content of a file(usually a set of commands), such as .py or shell script.

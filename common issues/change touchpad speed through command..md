@@ -28,3 +28,7 @@ xinput --set-prop 14 171 4.000000, 0.000000, 0.000000, 0.000000, 4.000000, 0.000
     Synaptics Scrolling Distance (301):	-75, 75
     xinput --set-prop 10 301 -75, 75
 ```
+
+### 5.syncliet
+
+### 6.edit file in /etc/X11/xorg.conf.d
