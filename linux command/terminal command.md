@@ -137,9 +137,13 @@ Ps
 ---
  
 ```
-ps –A 
-
+ps :without parameter will only show process executed by root
+ps –A :all process including those started by bootloader(systemd)
 ps -A | grep <processname> 
+
+Usually when we use the command ps we add parameters like -a, -x and -u.
+While -a lists processes started by all users, -x also lists processes started at boot like daemons, the parameter -u will add columns with additional information on each process:
+ps -aux
 ```
  
 
@@ -306,3 +310,59 @@ and then you can run executable by command in specified directory.
 source
 ---
 source is used to read and execute content of a file(usually a set of commands), such as .py or shell script.
+
+netstat
+---
+[detailed tutorial](https://www.howtogeek.com/513003/how-to-use-netstat-on-linux/)
+
+> socket
+Sockets have two main states: They are either connected and facilitating an ongoing network communication, or they are waiting for an incoming connection to connect to them. 
+The listening socket is called the server, and the socket that requests a connection with the listening socket is called a client.These names have nothing to do with hardware or computer roles. They simply define the role of each socket at each end of the connection.
+
+The `netstat` command lets you discover which sockets are connected and which sockets are listening. Meaning, it tells you which ports are in use and which processes are using them. It can show you routing tables and statistics about your network interfaces and multicast connections.
+
+1. `netstat -a` The -a (all) option makes netstat show all the connected and waiting sockets. 
+**output**:
+
+    Active Internet connections (servers and established)
+    |Proto |Recv-Q |Send-Q |Local Address     |Foreign Address     |State |
+    |tcp   |    0      0     localhost:domain      0.0.0.0:*        LISTEN 
+    |tcp   |    0      0     0.0.0.0:ssh           0.0.0.0:*        LISTEN 
+    |tcp   |    0      0     localhost:ipp         0.0.0.0:*        LISTEN 
+    |tcp   |    0      0     localhost:smtp        0.0.0.0:*        LISTEN 
+    |tcp6  |    0      0     [::]:ssh              [::]:*           LISTEN 
+    |tcp6  |    0      0     ip6-localhost:ipp     [::]:*           LISTEN 
+    
+    
+    Active UNIX domain sockets (servers and established)
+    Proto RefCnt Flags   Type     State       I-Node  Path
+    unix  24     [ ]     DGRAM                12831   /run/systemd/journal/dev-log
+    unix  2      [ ACC ] STREAM    LISTENING  24747   @/tmp/dbus-zH6clYmvw8
+    unix  2      [ ]     DGRAM                26372   /run/user/1000/systemd/notify
+    unix  2      [ ]     DGRAM                23382   /run/user/121/systemd/notify
+    unix  2      [ ACC ] SEQPACKET LISTENING  12839   /run/udev/control
+
+The “Active Internet” section lists the connected external connections and local sockets listening for remote connection requests. That is, it lists the network connections that are (or will be) established to external devices.
+
+The “Active Internet” columns are:
+**Proto**: The protocol used by this socket (for example, TCP or UDP).
+**Recv-Q**: The receive queue. These are incoming bytes that have been received and are buffered, waiting for the **local process** that is using this connection to read and consume them.
+**Send-Q**: The send queue. This shows the bytes that are ready to be sent from the send queue.
+**Local address**: The address details of the local end of the connection. The default is for netstat to show the **local hostname** for the address, and the name of the service for the port.
+**Foreign address**: The address and port number of the remote end of the connection.
+**State**: The state of the local socket. For UDP sockets, this is usually blank.(check out tcp notes in onenote)
+
+
+The “UNIX domain” section lists the connected and listening internal connections. In other words, it lists the connections that have been established within your computer between different applications, processes, and elements of the operating system.
+
+2. `netstat -au | less` -u option means show only udp, you can also use -t option to show tcp
+3. `netstat -s` -s shows Network Statistics , use -t or other option to show result by Protocol
+4. `netstat -p` -p shows process id with socket.
+
+
+ifconfig
+---
+command that allows for diagnosing and configuring network interfaces.
+[detailed explanation](https://goinbigdata.com/demystifying-ifconfig-and-network-interfaces-in-linux/)
+> `tcpdump -D` can also show list of available interfaces
+
