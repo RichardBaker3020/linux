@@ -1,11 +1,11 @@
  terminal command
 ====
-**more**
+more
 ---
 `more 按页显示文件内容，空格翻页 b回到第一页`
 
 
-**cat** 
+cat 
 ---
 ```
 cat 文件 查看文件内容 
@@ -31,7 +31,8 @@ touch
 ---
 `touch filename` used to create empty file
 `touch -a filename` use to update access time without changing the file
-**rm**
+
+rm
 ---
 ```
 rm -i 代替 rm ，删除前确认 
@@ -203,7 +204,7 @@ find . type f -name <name>: means only show content whose type is file
 dot '.' means current folders
 
 ```
-grep(负责过滤的命令)
+grep
 ---
 ```
 grep 'import' new.py :Search any line that contains the word in filename (with -i option search case-insensitive)
@@ -287,6 +288,11 @@ Z: Zombie
 Press the Q key to exit from top.
 ```
 
+w
+---
+w is a command-line utility that displays information about currently logged in users and what each user is doing. It also gives information about how long the system has been running, the current time, and the system load average.
+detailed info about output explanation and avaiable options: [link](https://linuxize.com/post/w-command-in-linux/)
+
 wget
 ---
 wget is a free utility for non-interactive download of files from the web. It supports HTTP, HTTPS, and FTP protocols, as well as retrieval through HTTP proxies.
@@ -366,3 +372,49 @@ command that allows for diagnosing and configuring network interfaces.
 [detailed explanation](https://goinbigdata.com/demystifying-ifconfig-and-network-interfaces-in-linux/)
 > `tcpdump -D` can also show list of available interfaces
 
+test
+---
+test is used as part of the conditional execution of shell commands.
+test exits with the status code determined by EXPRESSION. 
+To see the exit status,type `echo $?`, A value of 0 means the expression evaluated as true, and a value of 1 means the expression evaluated as false.
+
+two form:
+1. test EXPRESSION
+2. [ EXPRESSION ]
+
+`test 100 -lt 99 && echo "Yes." || echo "No."`
+or `[ 100 -lt 99 ] && echo "Yes." || echo "No."`
+
+```
+patrick@surface:$ [ 100 -eq 22 ]
+patrick@surface:$ echo $?
+1
+```
+[detailed usage](https://www.computerhope.com/unix/test.htm)
+
+
+printf
+---
+
+printf 由 POSIX 标准所定义，因此使用 printf 的脚本比使用 echo 移植性好。
+
+printf 使用引用文本或空格分隔的参数，外面可以在 printf 中使用格式化字符串，还可以制定字符串的宽度、左右对齐方式等。
+> 默认 printf 不会像 echo 自动添加换行符，我们可以手动添加 \n。
+
+e.g.
+```
+printf "%-10s %-8s %-4s\n" 姓名 性别 体重kg  
+printf "%-10s %-8s %-4.2f\n" 郭靖 男 66.1234 
+printf "%-10s %-8s %-4.2f\n" 杨过 男 48.6543 
+printf "%-10s %-8s %-4.2f\n" 郭芙 女 47.9876 
+```
+
+output:
+```
+姓名     性别   体重kg
+郭靖     男      66.12
+杨过     男      48.65
+郭芙     女      47.99
+```
+
+[detailed tutorial](https://www.computerhope.com/unix/uprintf.htm)

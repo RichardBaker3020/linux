@@ -1,0 +1,40 @@
+terminal, tty, console, shell
+========================
+
+terminal vs tty
+---
+1. a **tty** is a particular kind of device file which implements a number of additional commands (ioctls) beyond read and write. In its most common meaning, *terminal is synonymous with tty.* 
+
+2. **virtual terminal/pseudo terminal(pty)** are emulated by software, handling input and output in the same way a physical device would so that the software connected is not aware there's not a real device attached.
+
+3. **TTY1-7** and **gnome-terminal** are both virtual terminals emulated by terminal emulator. 
+The difference between TTY1-7 and gnome-terminal is that the system provides the ttys, whereas gnome-terminal are themselves running on a tty (which is running the graphical subsystem). And another difference between them and "gnome-terminal" is that they don't have a GUI.
+
+4. **terminal emulator** 
+e.g. [xterm](https://en.wikipedia.org/wiki/Xterm)
+In computing, xterm is the standard terminal emulator for the X Window System. A user can have many different invocations of xterm running at once on the same display, each of which provides independent input/output for the process running in it (normally the process is a Unix shell).
+
+console
+---
+*A console is generally a terminal in the physical sense* that is by some definition the primary terminal directly connected to a machine. The console appears to the operating system as a (kernel-implemented) tty. On some systems, such as Linux and FreeBSD, the console appears as several ttys (special key combinations switch between these ttys); just to confuse matters, the name given to each particular tty can be “console”, ”virtual console”, ”virtual terminal”, and other variations.
+
+shell
+---
+In unix circles, shell has specialized to mean a command-line shell, centered around entering the name of the application one wants to start, followed by the names of files or other objects that the application should act on, and pressing the Enter key. Other types of environments don't use the word “shell”; for example, window systems involve “window managers” and “desktop environments”, not a “shell”.
+
+Command-line shells include flow control constructs to combine commands. In addition to typing commands at an interactive prompt, users can write scripts. The most common shells have a common syntax based on the Bourne_shell. When discussing “shell programming”, the shell is almost always implied to be a Bourne-style shell. Pretty much any Unix-like system has a Bourne-style shell installed as /bin/sh, usually ash, ksh or bash.
+
+In unix system administration, *a user's shell is the program that is invoked when they log in*. Normal user accounts have a command-line shell, but users with restricted access may have a restricted shell or some other specific command (e.g. for file-transfer-only accounts).
+
+terminal vs shell
+---
+**The division of labor** between the terminal and the shell is not completely obvious. Here are their main tasks.
+
+1. Input: the terminal converts keys into control sequences (e.g. Left → \e[D). The shell converts control sequences into commands (e.g. \e[D → backward-char).
+2. Line editing, input history and completion are provided by the shell.
+    * The terminal may provide its own line editing, history and completion instead, and only send a line to the shell when it's ready to be executed. The only common terminal that operates in this way is M-x shell in Emacs.
+3. Output: the shell emits instructions such as “display foo”, “switch the foreground color to green”, “move the cursor to the next line”, etc. The terminal acts on these instructions.
+4. The prompt is purely a shell concept.
+5. The shell never sees the output of the commands it runs (unless redirected). Output history (scrollback) is purely a terminal concept.
+6. Inter-application copy-paste is provided by the terminal (usually with the mouse or key sequences such as Ctrl+Shift+V or Shift+Insert). The shell may have its own internal copy-paste mechanism as well (e.g. Meta+W and Ctrl+Y).
+7. Job control (launching programs in the background and managing them) is mostly performed by the shell. However, it's the terminal that handles key combinations like Ctrl+C to kill the foreground job and Ctrl+Z to suspend it.

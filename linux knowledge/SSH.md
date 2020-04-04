@@ -1,0 +1,91 @@
+SSH
+========================
+log into remote machine
+---
+SSH之所以能够保证安全，原因在于它采用了公钥加密。
+
+**整个过程是这样的**：
+（1）远程主机收到用户的登录请求，把自己的公钥发给用户。
+（2）用户使用这个公钥，将登录密码加密后，发送回来。
+（3）远程主机用自己的私钥，解密登录密码，如果密码正确，就同意用户登录。
+
+**"中间人攻击"（Man-in-the-middle attack）:**
+如果有人截获了登录请求，然后冒充远程主机，将伪造的公钥发给用户，那么用户很难辨别真伪。因为不像https协议，SSH协议的公钥是没有证书中心（CA）公证的，也就是说，都是自己签发的。
+
+**SSH协议应对:**
+如果你是第一次登录对方主机，系统会出现下面的提示：
+
+    　　$ ssh user@host                                                          
+                                                                                
+    　　The authenticity of host 'host (12.18.429.21)' can't be established.
+                                                                                
+    　　RSA key fingerprint is 98:2e:d7:e0:de:9f:ac:67:28:c2:42:2d:37:16:58:4d.
+                                                                                
+    　　Are you sure you want to continue connecting (yes/no)?
+
+这段话的意思是，无法确认host主机的真实性，只知道它的公钥指纹(MD5 HASH fingerprint)，问你还想继续连接吗？
+很自然的一个问题就是，用户怎么知道远程主机的公钥指纹应该是多少？
+回答是没有好办法，远程主机必须在自己的网站上贴出公钥指纹，以便用户自行核对。
+
+假定经过风险衡量以后，用户决定接受这个远程主机的公钥。
+
+    　Are you sure you want to continue connecting (yes/no)? yes
+
+系统会出现一句提示，表示host主机已经得到认可。
+
+    Warning: Permanently added 'host,12.18.429.21' (RSA) to the list of known hosts.
+
+然后，会要求输入密码。
+
+    Password: (enter password)
+
+当远程主机的公钥被接受以后，它就会被保存在文件$HOME/.ssh/known_hosts之中。下次再连接这台主机，系统就会认出它的公钥已经保存在本地了，从而跳过警告部分，直接提示输入密码。
+
+**公钥登录**
+所谓"公钥登录"，原理很简单，就是用户将自己的公钥储存在远程主机上。登录的时候，远程主机会向用户发送一段随机字符串，用户用自己的私钥加密后，再发回来。远程主机用事先储存的公钥进行解密，如果成功，就证明用户是可信的，直接允许登录shell，不再要求密码。
+
+这种方法要求用户必须提供自己的公钥。
+
+
+用ssh-keygen生成一个：
+
+    $ ssh-keygen
+
+运行结束以后，在$HOME/.ssh/目录下，会新生成两个文件：id_rsa.pub和id_rsa。前者是你的公钥，后者是你的私钥。
+这时再输入下面的命令，将公钥传送到远程主机host上面：
+
+    $ ssh-copy-id user@host
+
+好了，从此你再登录，就不需要输入密码了。
+
+**authorized_keys文件**
+远程主机将用户的公钥，保存在登录后的用户主目录的$HOME/.ssh/authorized_keys文件中
+[detailed](http://www.ruanyifeng.com/blog/2011/12/ssh_remote_login.html)
+
+Executing remote commands on the server
+---
+The ssh command is often also used to remotely execute commands on the remote machine without logging in to a shell prompt. The syntax for this is:
+
+    ssh hostname command
+e.g.
+
+    ssh sample.ssh.com  ls /tmp/doc
+
+After authenticating to the remote server, the contents of the remote directory will be displayed
+
+SSH client configuration
+---
+The ssh command reads its configuration from the SSH client configuration file
+for detailed info: [SSH client config file](https://www.ssh.com/ssh/config/)
+
+port forwarding
+---
+1. local forwarding
+2. remote forwarding
+
+detailed tutorial: [link1](http://www.ruanyifeng.com/blog/2011/12/ssh_port_forwarding.html)
+                   [link2](https://jeremyxu2010.github.io/2018/12/ssh%E7%9A%84%E4%B8%89%E7%A7%8D%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/)
+
+## further reading
+
+[SSH protocol and connection detailed explanation](https://segmentfault.com/a/1190000011395818)

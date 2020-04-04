@@ -23,7 +23,7 @@ unzip .zip file
 > gunzip <filename>
 
 
-create, delete, show env var
+environment var
 ---
 > env
 allow you to run another program in a another environment without influencing the current one.

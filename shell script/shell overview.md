@@ -1,0 +1,26 @@
+shell overview
+========================
+There are a variety of shells for Linux, such as:
+> Bourne Shell（/usr/bin/sh或/bin/sh）
+> Bourne Again Shell（/bin/bash）  (bash)
+> C Shell（/usr/bin/csh）
+> K Shell（/usr/bin/ksh）
+> Shell for Root（/sbin/sh）
+
+
+create a shell script
+---
+`vim script.sh` : **.sh** means shell file.
+
+before running shell script, you have to make script executable, by `chomod +x script.sh`
+
+run a script
+---
+1. `./script.sh` in current directory
+2. `/bin/sh script.sh` run the shell script through interpreter
+
+first line in .sh file
+---
+`#!/bin/bash`
+`foo`
+you can use `#!` to specify what interpreter you wanna use to run the script.
