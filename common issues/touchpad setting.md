@@ -1,4 +1,4 @@
-# change touchpad speed through command.
+# touchpad setting
 
 ### 1.list all device id
 ```
@@ -32,3 +32,13 @@ xinput --set-prop 14 171 4.000000, 0.000000, 0.000000, 0.000000, 4.000000, 0.000
 ### 5.syncliet
 
 ### 6.edit file in /etc/X11/xorg.conf.d
+
+### 7.disable touchpad while typing 
+
+`syndaemon –d `
+
+Usage: syndaemon [-i idle-time] [-m poll-delay] [-d] [-t] [-k] 
+
+  -i How many seconds to wait after the last key press before enabling the touchpad. (default is 2.0s) 
+
+  -t Only disable tapping and scrolling, not mouse movements. 

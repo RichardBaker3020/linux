@@ -23,6 +23,15 @@ unzip .zip file
 > gunzip <filename>
 
 
+open file in default app
+---
+`xdg-open file`
+
+show all symbolic link in current directory
+---
+To only process the current directory:
+`find . -maxdepth 1 -type l -ls`
+
 environment var
 ---
 > env

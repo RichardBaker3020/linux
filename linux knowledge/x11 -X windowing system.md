@@ -16,10 +16,27 @@ X采用Clinet/Server的架构模型(*X中所提及的“客户端”和“服务
 
 X的一大特点在于“网络透明性”：应用程序（“客户端”应用程序）所运行的机器，不一定是用户本地的机器（显示的“服务器”）。
 
-在图例中，X服务器从键盘、鼠标端获取输入信息，之后将输入反馈显示于银幕，而网页浏览器及终端模拟器则在客户端的本机系统上运行。此外客户端也通过网络与远程的机器、服务器保持联系，以保消息状态的更新。如此的机制及架构能使远程运行的软件如同在本机端运行一样。
 
-服务器和客户端之间的通信协议的运作对计算机网络是透明的：客户端和服务器可以在同一台计算机上，也可以不是，或许其架构和操作系统也不同，但都能运行。客户机和服务器还能够使用安全连接在互联网上安全地通讯。
+swtich between x and testmode
+---
+`[Ctrl] + [Alt] + [F2] ~[F6] ` :命令行登陆 tty2  tty6 终端机; 
 
-为了使远端客户程序显示到本地服务器，用户一般需要启动一个终端窗口和到达远端计算机的telnet或者ssh，令其显示到用户计算机，然后启动客户端。然后客户端就会连接到本地计算机，并且远端应用程序会显示到本地屏幕并被本地输入设备所控制。
+`[Ctrl] + [Alt] + [F1]` :图形接口桌面。
 
-实际的远端客户端的例子有：图形化管理远程计算机；在远端UNIX计算机上运行计算密集的仿真程序并把结果显示到本地的Windows桌面计算机；用一套显示器、键盘和鼠标控制同时运行在多台计算机上的图形化软件。
+当开机完成之后,默认系统只会提供给你一个 tty 而已, tty2~tty6 其实一开始是不存在的, 要切换时 (按下 [ctrl]+[alt]+[F2]),系统才产生出额外的 tty2, tty3... 
+
+若你在纯文本环境中启动 X 窗口,那么图形界面就会出现在当时的那个 tty 上面。举例来说,你在 tty3 登陆系统,然后输入 `startx` 启动个人的图形界面, 那么这个图形界面就会产生在 
+
+要让startx生效至少需要下面这几件事情的配合: 并没有其他的 X window 被启用; 你必须要已经安装了X Window system 
+
+without X
+---
+To boot Ubuntu 16.04 Desktop without X and make this the default, use: 
+`sudo systemctl set-default multi-user.target `
+ 
+
+To return to default booting into X, use :
+`sudo systemctl set-default graphical.target `
+
+To see the current default target:
+`sudo systemctl get-default `

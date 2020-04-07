@@ -1,12 +1,96 @@
  terminal command
 ====
-more
+shell builtin command
 ---
+### cd 
+```
+cd / 
+
+cd .. 
+
+cd cd ~ 
+
+cd /dir/dir2 / means from root directory 
+
+cd dir means from current directory 
+
+cd -  used to return to the previous dir 
+```
+
+### popd/pushd/dirs
+[detials](https://linux.101hacks.com/cd-command/dirs-pushd-popd/)
+
+dirs: Display the directory stack
+
+pushd: Push directory into the stack
+
+popd: Pop directory from the stack and cd to it
+
+use above commands you can save several dirs and go to them in the order of the stacks(first in first out)
+### Kill 
+```
+kill PID
+killall prcname 
+```
+
+### alias
+```
+alias dtwt='syndaemon -d -i 1.0s'
+```
+
+### pwd 
+```
+Show current path 
+```
+ 
+### export
+
+In general, the export command marks an environment variable to be exported with any newly forked child processes and thus it allows a child process to inherit all marked variables. 
+detailed instructions [export - LinuxConfig.org](https://linuxconfig.org/learning-linux-commands-export)
+> use **export** to set temporary environment variable:
+`export PATH=$PATH:/home/patrick/clash` or `export PATH=$PATH:$(pwd)`(set env for current dir)
+and then you can run executable by command in specified directory.
+
+### source
+source is used to read and execute content of a file(usually a set of commands), such as .py or shell script.
+
+### jobs
+show all backgroud process with id
+> fg %(id) :bring process back to foregroud
+> bg
+
+### help
+
+show all shell builtin command
+
+you can show help page for builtin command by(only work for builtin command):
+`help cd`
+
+### history
+
+```
+history | less : show command histories
+and you could use '!id' to run the history command
+```
+
+external command
+---
+*binary located in /bin*
+
+### sudo
+sudo only works with executables.
+
+**e.g.**
+if you `sudo cd direc`, your computer will look through your PATH, trying to find an executable named "cd". It will not find one. (only the shell built-in command "cd" exists, and that is not an executable file). Hence, you get an error. (On Ubuntu, the error message `sudo: cd: command not found`.)
+
+
+### more
+
 `more 按页显示文件内容，空格翻页 b回到第一页`
 
 
-cat 
----
+### cat 
+
 ```
 cat 文件 查看文件内容 
 
@@ -19,21 +103,36 @@ tac 反向显示文件
 cat .bashrc | less : show file content using scroll 
 ```
 
-cp
----
-```
-目标文件存在时，会询问是否覆盖 cp -i 
+### cp
 
-一个目录及其档案复制到另一个目录下 cp -a 
-```
 
-touch
----
+`cp foo.txt bar.txt` : copy foo.txt to new created bar.txt in the same directory.
+
+ > this will overwrite if there's already a file named bar.txt in current dir
+ -b option will make a backup.
+ or Using the -i flag the command will prompt to overwrite the file. 
+
+`cp foo.txt dir` : copy file to directory named dir in current folder.
+
+`cp foo bar.txt baz.txt dir`: copy multiple file to a dir
+
+To copy a directory pass the -R flag. This will recursively copy a folder and create a copy.
+`cp -R directory/ foo`
+
+目标文件存在时，会询问是否覆盖 `cp -i` 
+
+一个目录及其档案复制到另一个目录下 `cp -a `
+
+How to preserve file attributes: 
+pass the `--preserve` option along with the attributes to be preserved. 
+
+### touch
+
 `touch filename` used to create empty file
 `touch -a filename` use to update access time without changing the file
 
-rm
----
+### rm
+
 ```
 rm -i 代替 rm ，删除前确认 
 
@@ -44,16 +143,16 @@ rm -v：显示指令的详细执行过程
 rm -d 只删除空目录 ，代替 rmdir 不能删除非空目录 
 ```
 
-tree 
----
+### tree 
+
  
 ```
 show all directories and file in tree pattern 
 ```
  
 
-mkdir 
----
+### mkdir 
+
 ```
 
 递归创建多个目录 
@@ -62,81 +161,55 @@ mkdir -p test2/test22
 ```
  
 
-pwd 
----
- 
-```
-Show current path 
-```
- 
 
- ls 
----
- 
-```
-ls -a 
 
-ls -l show files and detailed info(with -h can show you human readable info, size will be mb, kb)
+###  ls 
+
+
+`ls -a `
+
+`ls -l `show files and detailed info(with -h can show you human readable info, size will be mb, kb)
+ > `ll`: show files and detailed info including hidden files 
     [detailed tutorial](https://www.garron.me/en/go2linux/ls-file-permissions.html)
-    
+
     #drwxr-xr-x  2 patrick patrick     4096 Mar 26 12:54 bin
      -rw-r--r--  1 patrick patrick       99 Nov 15 17:12 bluetooth.txt
-     
-     The permissions info is represented by first ten characters, 
-     first character identifies the type, d means directory and - means file
-     the next nine characters represent permissions for each set.
-         first three for user who owns the file
-         middle three for group
-         last three for others
-     e.g. rwx means having all read write execute permissions, r-x means no write permissions.
-     
-     2 means number of dir or links
-     patrick and patrick mean user and group
-     4096 means size by bits
-     
-ls -R 
 
- 
+The permissions info is represented by first ten characters, first character identifies the type, d means directory and - means file the next nine characters represent permissions for each set.
+1. first three for user who owns the file
+2. middle three for group
+3. last three for others
+
+e.g. `rwx` means having all read write execute permissions, `r-x` means no write permissions.
+     `2` means number of dir or links
+     `patrick` and `patrick` mean user and group
+     `4096` means size by bits
+
+`ls -R ` recursively, show all dir and files inside it.
 
 计算当前目录下的文件数和目录数 
+`ls -l * |grep "^-"|wc -l` 文件个数 
+`ls -l * |grep "^d"|wc -l` 目录个数 
 
-ls -l * |grep "^-"|wc -l ---文件个数 
-
-ls -l * |grep "^d"|wc -l ---目录个数 
-
-
-
-ll: show files and detailed info including hidden files 
-
- 
-
-列出current directory 文件 and child-dir 的绝对路径 
-
-ls | sed "s:^:`pwd`/:" 
-
-```
-cd
----
- 
-```
-cd / 
-
-cd .. 
-
-cd cd ~ 
-
-cd /dir/dir2 / means from root directory 
-
-cd dir means from current directory 
-
-cd - 
-```
- 
+`ls -l` for mtime, `ls -lu` for atime, `ls -lc` for ctime
+1. mtime, or modification time, is when the file was last modified. 
+2. ctime, or change time, is when the file’s property changes. 
+3. atime, or access time, is updated when the file’s contents are read by an application or a command
+> *Atime can be updated alone, Ctime will update atime, Mtime will update both atime and ctime.*
 
 
-Ps 
----
- 
+### lsblk 
+列出系统上的所有磁盘列表, 就是列出所有储存设备
+
+output:
+
+1. RM:是否为可卸载设备 (removable device),如光盘、USB 磁盘等等
+2. SIZE:当然就是容量啰!
+3. RO:是否为只读设备的意思
+4. TYPE:是磁盘 (disk)、分区 (partition) 还是只读存储器 (rom) 等输出
+5. MOUTPOINT:就是前一章谈到的挂载点!
+
+###  Ps 
 ```
 ps :without parameter will only show process executed by root
 ps –A :all process including those started by bootloader(systemd)
@@ -147,29 +220,45 @@ While -a lists processes started by all users, -x also lists processes started a
 ps -aux
 ```
  
+### file
+show the type of a file or directory, including binary, ASCII text, directory and data.
 
-Kill 
----
+### whereis/which/whatis
+
+The whereis command lets users locate binary, source, and manual page files for a command. 
+`whereis ls`
+also, whereis can help you to know whether a command is shell builtin.(if whereis can't locate the path, it is a builtin)
+
+`which` searches your user-specific PATH (which may include some of the locations whereis searches, and may not include others - it might also include some places that whereis doesn't search if you'd added to your PATH)
+
+`whatis` display one-line manual page descriptions
+
+### type
+
+The type command is used to find out if command is builtin or external binary file. It also indicate how it would be interpreted if used as a command name.
+
+`type -t command`
+outputs will be:
+> alias (command is shell alias)
+> keyword (command is shell reserved word)
+> function (command is shell function)
+> builtin (command is shell builtin)
+> file (command is disk file)
+
+`type -a command`
+The -a option can be used to find out if given command is disk file, alias, keyword or function. It will display all of the places that contains an executable available including aliases, builtins, and functions.
+
+`type -a pwd`
+Sample Outputs:
 ```
-kill PID
-killall prcname 
+pwd is a shell builtin
+pwd is /bin/pwd
 ```
 
-jobs
----
-show all backgroud process with id
-> fg %(id) :bring process back to foregroud
-> bg
 
 
-alias
----
-```
-alias dtwt='syndaemon -d -i 1.0s'
-```
+### chmod/chown/chgrp
 
-chmod
----
 ```
 chmod [ugao] [+-=] [rwx] [file or dir]
     1. u:user g:group a:all o:other, if none of these are used, the 'a' is default.
@@ -180,32 +269,86 @@ e.g. chmod u=rw, og+r, new_file.txt
      chmod -R u+x directory  -R means changing permissions recersively for a dirctory.
      
 the other way is to use number to change permissions
-```
+各权限的分数对照表如下:
+> r:4 > w:2 > x:1
 
-curl
----
+e.g.### 
+[-rwxrwx] 分数则是:
+> owner = rwx = 4+2+1 = 7 
+> group = ### rwx = 4+2+1 = 7 
+> others=  = 0+0+0 = 0
+所以等一下我们设置权限的变更时,该文件的权限数字就是770啦!
+```
+chgrp :改变文件所属群组
+chown :改变文件拥有者
+
+
+### curl
+
 ```
 to retrieve content with url 
 with -o option download content to filr curl url -o filename
 ```
 
-df
----
+### df
+
 ```
 df -h show disk space condition
+df -Th: to see filesystem of  and the type of them
 ```
 
-find
----
-```
-find . -name <filename> :this will show all file and directories named <filename>
-find . iname <name> : means case insensitive
-find . type f -name <name>: means only show content whose type is file
-dot '.' means current folders
+### du
+`du -h` show the size of current directory with readable result.
+`du -a -h` show all files along with their size in current directory.
 
-```
-grep
----
+
+### dd
+dd 可备份完整的 partition 或 disk ,因为 dd 可读取磁盘的 sector 表面数据
+
+
+### ln
+create hard link or symbolic link
+hardlink: `ln text.txt test.txt`
+symboliclink: `ln -s text.txt test.txt`
+
+
+### find
+
+`find . -name <filename>` :this will show all file and directories named <filename> in current directory(.), if path is ignored, current dir is default.
+`find . iname <name>` : means case insensitive
+`find . type f -name <name>`: means only show content whose type is file
+
+#### option about time
+`find path -mtime +7` means file that hasn't been modifed in last 7 days.
+1. +4代表大于等于5天前的文件名
+2. -4代表小于等于4天内的文件文件名
+3. 4则是代表4-5那一天的文件文件名
+
+#### option about user
+1. `-uid n` :n 为数字,这个数字是使用者的帐号 ID,亦即 UID ,这个 UID 是记录在/etc/passwd 里面与帐号名称对应的数字。
+2. `-gid n `:n 为数字,这个数字是群组名称的 ID,亦即 GID,这个 GID 记录在/etc/group
+3. `-user name` :name 为使用者帐号名称
+4. `-group name`:name 为群组名称喔
+5. `-nouser`:寻找文件的拥有者不存在 /etc/passwd 的人!
+6. `-nogroup`:寻找文件的拥有群组不存在于 /etc/group 的文件!
+
+#### option about file
+`-name filename`:搜寻文件名称为 filename 的文件;
+`-size [+-]SIZE`:搜寻比 SIZE 还要大(+)或小(-)的文件。这个 SIZE 的规格有:
+> c: 代表 Byte, k: 代表 1024Bytes。所以,要找比 50KB还要大的文件,就是“ -size +50k ”
+`-type TYPE`:搜寻文件的类型为 TYPE 的,类型主要有:一般正规文件 (f), 设备文件 (b, c), 目录 (d), 链接文件 (l), socket (s), 及 FIFO (p) 等属性。
+`-perm mode` :搜寻文件权限“刚好等于” mode 的文件,这个 mode 为类似 chmod的属性值,举例来说, -rwsr-xr-x 的属性为 4755 !
+`-perm -mode` :搜寻文件权限“必须要全部囊括 mode 的权限”的文件,举例来说,我们要搜寻 -rwxr--r-- ,亦即 0744 的文件,使用 -perm -0744,
+当一个文件的权限为 -rwsr-xr-x ,亦即 4755 时,也会被列出来, 因为 -rwsr-xr-x 的属性已经囊括了 -rwxr--r-- 的属性了。
+`-perm /mode` :搜寻文件权限“包含任一 mode 的权限”的文件,举例来说,我们搜寻 -rwxr-xr-x ,亦即 -perm /755 时,但一个文件属性-rw------- 也会被列出来,因为他有 -rw.... 的属性存在!
+
+### locate
+find files by name, this command will find files in database in /var/lib/mlocate/, instead of scaning the disk, so it is faster than `find` command, but the database needs to be updated by hand.(auto per day)
+
+update database: `sudo updatedb`
+
+### grep
+
 ```
 grep 'import' new.py :Search any line that contains the word in filename (with -i option search case-insensitive)
 grep -r 'import' <path>: serch all files in current dir for word 'import'(with path option search for given dir)
@@ -216,27 +359,22 @@ Use the -l option to list file name whose contents mention main():  grep -l 'mai
 
 ```
 
-history
----
-```
-history | less : show command histories
-and you could use '!id' to run the history command
-```
 
-less
----
+
+### less
+
 ```
 like cate, less could also show content of a file: less new.py
 ```
 
-man
----
+### man
+
 ```
 man to show instructions of a command: man ps
 ```
 
-top
----
+### top
+
 ```
 The top command shows you a real-time display of the data relating to your Linux machine. The top of the screen is a status summary.
 
@@ -288,14 +426,18 @@ Z: Zombie
 Press the Q key to exit from top.
 ```
 
-w
----
+### w/who
+
 w is a command-line utility that displays information about currently logged in users and what each user is doing. It also gives information about how long the system has been running, the current time, and the system load average.
 detailed info about output explanation and avaiable options: [link](https://linuxize.com/post/w-command-in-linux/)
 
-wget
----
-wget is a free utility for non-interactive download of files from the web. It supports HTTP, HTTPS, and FTP protocols, as well as retrieval through HTTP proxies.
+### su
+
+switch to root usr. use `exit` to exit root user.
+
+### wget
+
+wget is a free utility for non-interactive download of files from the web. It supports HTTP, HTTPS, and FTP protocols, aser well as retrieval through HTTP proxies.
 ```
 'wget http://website.com/files/file.zip' : download the file from web
 'wget www.pincong.rocks' :download html into index.html file
@@ -305,20 +447,11 @@ wget is a free utility for non-interactive download of files from the web. It su
 
 ```
 
-export
----
-In general, the export command marks an environment variable to be exported with any newly forked child processes and thus it allows a child process to inherit all marked variables. 
-detailed instructions [export - LinuxConfig.org](https://linuxconfig.org/learning-linux-commands-export)
-> use **export** to set temporary environment variable:
-`export PATH=$PATH:/home/patrick/clash` or `export PATH=$PATH:$(pwd)`(set env for current dir)
-and then you can run executable by command in specified directory.
 
-source
----
-source is used to read and execute content of a file(usually a set of commands), such as .py or shell script.
 
-netstat
----
+
+### netstat
+
 [detailed tutorial](https://www.howtogeek.com/513003/how-to-use-netstat-on-linux/)
 
 > socket
@@ -366,14 +499,14 @@ The “UNIX domain” section lists the connected and listening internal connect
 4. `netstat -p` -p shows process id with socket.
 
 
-ifconfig
----
+### ifconfig
+
 command that allows for diagnosing and configuring network interfaces.
 [detailed explanation](https://goinbigdata.com/demystifying-ifconfig-and-network-interfaces-in-linux/)
 > `tcpdump -D` can also show list of available interfaces
 
-test
----
+### test
+
 test is used as part of the conditional execution of shell commands.
 test exits with the status code determined by EXPRESSION. 
 To see the exit status,type `echo $?`, A value of 0 means the expression evaluated as true, and a value of 1 means the expression evaluated as false.
@@ -393,8 +526,8 @@ patrick@surface:$ echo $?
 [detailed usage](https://www.computerhope.com/unix/test.htm)
 
 
-printf
----
+### printf
+
 
 printf 由 POSIX 标准所定义，因此使用 printf 的脚本比使用 echo 移植性好。
 

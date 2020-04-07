@@ -37,6 +37,29 @@ e.g.
 ### Pipes (`|`)
 Pipes are used to redirect a stream from one program to another. When a program’s standard output is sent to another through a pipe, the first program’s data, which is received by the second program, will not be displayed on the terminal. Only the filtered data returned by the second program will be displayed.
 
+### here string/here document
+here documents & here strings allow you the ability to generate multi-line data input as one continuous string. 
+Here documents are commonly used in shell scripts to *create whole files* or to display long messages. This is helpful when you *wanna pass a string as parameter to commands that only accept file*, such as `cat`, `md5sum` ,etc.
+
+**<<<** denotes a *here string*.
+`$ cat <<< 'hi there'`
+`hi there`
+It passes the word on the right to the standard input of the command on the left.(**cat accepts a file as parameter**)
+
+sometimes here string is better than pipe, cause introducing a pipe means the latter commands run in subshells and some variables might lose when back to parent shell. [link](https://unix.stackexchange.com/questions/80362/what-does-mean)
+
+**<<** denotes a here document. tutorial: [link](https://bash.cyberciti.biz/guide/Here_documents)
+```
+$ cat <<EOF
+> hi
+> there
+> EOF
+hi
+there
+```
+`EOF` can be any word.
+
+
 ### filter
 Filters
 Filters are commands that alter piped redirection and output. Note that filter commands are also standard Linux commands that can be used without pipes.
@@ -47,19 +70,6 @@ used with `|` operator
 `tee` - Tee redirects standard input to both standard output and one or more files.
 `tr` - tr finds-and-replaces one string with another.
 `wc` - wc counts characters, lines, and words.
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
