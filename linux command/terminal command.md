@@ -1,4 +1,4 @@
- terminal command
+terminal command
 ====
 shell builtin command
 ---
@@ -209,16 +209,45 @@ output:
 4. TYPE:是磁盘 (disk)、分区 (partition) 还是只读存储器 (rom) 等输出
 5. MOUTPOINT:就是前一章谈到的挂载点!
 
-###  Ps 
-```
-ps :without parameter will only show process executed by root
-ps –A :all process including those started by bootloader(systemd)
-ps -A | grep <processname> 
+###  ps 
 
-Usually when we use the command ps we add parameters like -a, -x and -u.
+> **all process can be found in /proc directory**
+
+detailed tutorial: [ps - Linux manual page](http://man7.org/linux/man-pages/man1/ps.1.html)
+
+* `ps` :without parameter will only show process executed by root
+* `ps –A/e `:all process including those started by bootloader(systemd)
+* `ps -A | grep <processname> `
+* `ps -eu` show fields like %CPU   %MEM    VSZ    RSS
+* `ps l` show basic info like s、pid、ppid、time 和 ucmd 等字段信息。
+
+> Usually when we use the command ps we add parameters like -a, -x and -u.
 While -a lists processes started by all users, -x also lists processes started at boot like daemons, the parameter -u will add columns with additional information on each process:
-ps -aux
-```
+* `ps aux` equals to `ps -eu`
+
+* `ps -o tid,sid,pid...(list of fields)` customize output fields
+
+	- *sid*(session),*tid*(terminal),*pid*(process)
+	- *ppid*(parent),*tpgid*(Linux 上的所有守护进程的 tpgid 值都是 - 1)
+	- *cmd*(location of cmd), *ucmd*(short one),*nice/ni*(priority, [-20,19], large means low priority)
+	-  *s*(state)
+	
+| field | explanation                                                    |
+| ----- | -------------------------------------------------------------- |
+| vsz   | virtual memory size KB vsz值并不反映真正物理内存大小                        |
+| rss   | resident set size 表示进程真正占用了的物理内存大小，单位 KB                       |
+| pmem  | 占用的物理内存大小 (rss) 占本机总物理内存大小百分比                                  |
+| PRI   | priority of the process.  Higher number means lower priority.  |
+| nlwp  | 表示当前process线程组中的线程个数，单线程进程此值均为 1                               |
+
+
+* `ps k/--sort [+/-]field` sort the output by specified field, + ascending, - descending
+
+* filter:
+	* `ps p 2,3,6` select ones whose pid equals to 2,3,6
+	* `ps -s <sid>` 
+	* `ps U <uid or user>`
+	* `ps -t <tty1>`  , (`ps T` to show current terminal)
  
 ### file
 show the type of a file or directory, including binary, ASCII text, directory and data.
@@ -375,56 +404,30 @@ man to show instructions of a command: man ps
 
 ### top
 
-```
-The top command shows you a real-time display of the data relating to your Linux machine. The top of the screen is a status summary.
 
-The first line shows you the time and how long your computer has been running for, how many users are logged into it, and what the load average has been over the past one, five, and fifteen minutes.
+The top command shows you a real-time display of the data relating to your Linux machine. 
 
-The second line shows the number of tasks and their states: running, stopped, sleeping and zombie.
+1. The first line shows you the time and how long your computer has been running for, how many users are logged into it, and what the load average has been.
 
-The third line shows CPU information. Here’s what the fields mean:
+2. The second line shows the number of tasks and their states: running, stopped, sleeping and zombie.
 
-us: value is the CPU time the CPU spends executing processes for users, in “user space”
-sy: value is the CPU time spent on running system “kernel space” processes
-ni: value is the CPU time spent on executing processes with a manually set nice value
-id: is the amount of CPU idle time
-wa: value is the time the CPU spends waiting for I/O to complete
-hi: The CPU time spent servicing hardware interrupts
-si: The CPU time spent servicing software interrupts
-st: The CPU time lost due to running virtual machines (“steal time”)
-The fourth line shows the total amount of physical memory, and how much is free, used and buffered or cached.
+3. The third line shows CPU information. Here’s what the fields mean:
 
-The fifth line shows the total amount of swap memory, and how much is free, used and available  (taking into account memory that is expected to be recoverable from caches).
+- us: value is the CPU time the CPU spends executing processes for users, in “user space”
+- sy: value is the CPU time spent on running system “kernel space” processes
+- ni: value is the CPU time spent on executing processes with a manually set nice value
+- id: is the amount of CPU idle time
+- wa: value is the time the CPU spends waiting for I/O to complete
+- hi: The CPU time spent servicing hardware interrupts
+- si: The CPU time spent servicing software interrupts
+- st: The CPU time lost due to running virtual machines (“steal time”)
 
-top command in a terminal window
+4. The fourth line shows the total amount of physical memory, and how much is free, used and buffered or cached.
 
-The user has pressed the E key to change the display into more humanly digestible figures instead of long integers representing bytes.
+5. The fifth line shows the total amount of swap memory, and how much is free, used and available  (taking into account memory that is expected to be recoverable from caches).
 
-The columns in the main display are made up of:
+> pressed the E/e key to change the display into more humanly digestible figures instead of long integers representing bytes.
 
-PID: Process ID
-USER: Name of the owner of the process
-PR: Process priority
-NI: The nice value of the process
-VIRT: Virtual memory used by the process
-RES: Resident memory used by the process
-SHR: Shared memory used by the process
-S: Status of the process. See the list below of the values this field can take
-%CPU: the share of CPU time used by the process since last update
-%MEM: share of physical memory used
-TIME+: total CPU time used by the task in hundredths of a second
-COMMAND: command name or command line (name + options)
-(The command column didn’t fit into the screenshot.)
-
-The status of the process can be one of:
-
-D: Uninterruptible sleep
-R: Running
-S: Sleeping
-T: Traced (stopped)
-Z: Zombie
-Press the Q key to exit from top.
-```
 
 ### w/who
 
@@ -434,6 +437,63 @@ detailed info about output explanation and avaiable options: [link](https://linu
 ### su
 
 switch to root usr. use `exit` to exit root user.
+
+### systemctl
+
+#### manage daemon 
+
+* `systemctl [command] [unit]`
+	command 有:
+
+| command   | explanation                      |
+| --------- | -------------------------------- |
+| start     |                                  |
+| stop      |                                  |
+| restart   |                                  |
+| reload    | reload the config                |
+| enable    | run on boot                      |
+| disable   |                                  |
+| status    |                                  |
+| is-active |                                  |
+
+   ==不应该使用 kill 的方式来关掉一个正常的服务否则 systemctl 会无法继续监控该服务, use stop command instead.==
+
+#### list all service(.service, .target)
+* `systemctl list-unit-files | grep enabled` :will list all enabled service that will run on boot.
+	* `systemctl | grep running`
+
+* `systemctl [command] [--type=TYPE] [--all]`
+	command:
+	1. `list-units`:依据 unit 列出目前有启动的 unit。
+	2. `list-unit-files` :依据 /usr/lib/systemd/system/ 内的文件,将所有文件列表说明。
+	4. 若加上 `--all` 会列出没启动的。
+    3. --type, 主要有 service, socket, target 等
+
+#### target unit
+ multi-user.target: 纯文本模式
+ graphical.target: 图形界面
+
+* `systemctl get-default` : to check the default mode, text-mode or graphical
+* `systemctl set-default multi-user.target` : set text-mode as default
+* `systemctl isolate multi-user.target` : quit graphical interface and into text-mode(sigh out)
+* `systemctl isolate graphical.target` : re-enter graph
+	* 在 target 项目则请使用 isolate (隔离不同的操作模式) 
+
+* `systemctl poweroff/reboot/suspend/hibernate/rescue/emergency` 
+	* above cmd could be alternates to `isolate shutdown.target|rescue.target ...` 
+
+#### daemon tree
+* `systemctl list-dependencies [unit] [--reverse]`
+	* reverse这个选项,代表“谁还会用到我的服务”的意思
+	* without [unit] option means default.target(e.g. graphical.target)
+
+e.g.
+```
+[root@study ~]# systemctl list-dependencies --reverse
+default.target
+└─graphical.target
+```
+
 
 ### wget
 
@@ -471,8 +531,8 @@ The `netstat` command lets you discover which sockets are connected and which so
     |tcp   |    0      0     localhost:smtp        0.0.0.0:*        LISTEN 
     |tcp6  |    0      0     [::]:ssh              [::]:*           LISTEN 
     |tcp6  |    0      0     ip6-localhost:ipp     [::]:*           LISTEN 
-    
-    
+
+ 
     Active UNIX domain sockets (servers and established)
     Proto RefCnt Flags   Type     State       I-Node  Path
     unix  24     [ ]     DGRAM                12831   /run/systemd/journal/dev-log

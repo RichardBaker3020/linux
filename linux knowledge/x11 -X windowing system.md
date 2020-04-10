@@ -33,7 +33,7 @@ without X
 ---
 To boot Ubuntu 16.04 Desktop without X and make this the default, use: 
 `sudo systemctl set-default multi-user.target `
- 
+
 
 To return to default booting into X, use :
 `sudo systemctl set-default graphical.target `

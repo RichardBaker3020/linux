@@ -12,15 +12,14 @@ check all available commands in bash
 
 internal command or external command
 ---
-> whereis <cmd> , if the corresponding path is shown for a specified command, this command is a external command, or otherwise.
-```
-通俗地说，“内部命令”就是内置在 shell 中的命令；而“外部命令”则对应了某个具体的【可执行文件】。
-当你在 shell 中执行“外部命令”，shell 会启动对应的可执行文件，从而创建出一个“子进程”；而如果是“内部命令”，就【不】产生子进程。
-```
+`whereis <cmd>` , if the corresponding path is shown for a specified command, this command is a external command, or otherwise.
+
+> 通俗地说，“内部命令”就是内置在 shell 中的命令；而“外部命令”则对应了某个具体的【可执行文件】。当你在 shell 中执行“外部命令”，shell 会启动对应的可执行文件，从而创建出一个“子进程”；而如果是“内部命令”，就【不】产生子进程。
+
 
 unzip .zip file
 ---
-> gunzip <filename>
+`gunzip <filename>`
 
 
 open file in default app
@@ -34,22 +33,34 @@ To only process the current directory:
 
 environment var
 ---
-> env
+* env
+
 allow you to run another program in a another environment without influencing the current one.
 run without parameter, will print all environment variables.
 
-> printenv
-> printenv HOME
-> printenv LANG PWD
-print env variables
+* `printenv`
+* `printenv HOME`
+* `printenv LANG PWD`: print env variables
 
-> set
+* set
+
 set  **shell** variables
-show a list of env, shell and variables without parameter `set `
-to create shell variables: `var='sgjgdks'`
+use without option, `set `show a list of env, shell and variables without parameter
+> to create shell variables: `var='sgjgdks'`
 
-> unset
+* unset
+
 delete shell and env variables
+
+* export
+
+In general, the export command marks an environment variable to be exported with any newly forked child processes and thus it allows a child process to inherit all marked variables. 
+detailed instructions [export - LinuxConfig.org](https://linuxconfig.org/learning-linux-commands-export)
+
+use **export** to set temporary environment variable:
+
+`export PATH=$PATH:/home/patrick/clash` or `export PATH=$PATH:$(pwd)`(set env for current dir)
+and then you can run executable by command in specified directory.
 
 __Persistent Environment Variables__
 ```

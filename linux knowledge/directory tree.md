@@ -11,8 +11,10 @@ necessary directory in root directory.
 目录有点类似Windows 系统的“C:\Windows\ (当中的一部份) + C:\Program files\”这两个目录的综合体
 
 > /usr is a place for system-wide, read-only files. So all your installed software goes there. It does not duplicate any names of / except /bin and /lib, but, originally, with a different purpose: /bin, /lib is only for binaries and libraries required for booting, while /usr/bin, /usr/lib is for all the other executables and libraries. (now be a good boy and don't ask about /sbin, this is the Short Version after all)
-Nowadays, the distinction between "required for booting" and not has diminished, since most modern distros, including Ubuntu, cannot properly boot without several files from /usr. And that's why there is a strong movement towards merging /usr/bin and /bin, so probably in the near future (Ubuntu 12.10 perhaps?) /bin will be a symlink to /usr/bin.
-detailed info about /usr and its subfolders: [link](https://askubuntu.com/questions/130186/what-is-the-rationale-for-the-usr-directory)
+
+> Nowadays, the distinction between "required for booting" and not has diminished, since most modern distros, including Ubuntu, cannot properly boot without several files from /usr. And that's why there is a strong movement towards merging /usr/bin and /bin, so probably in the near future (Ubuntu 12.10 perhaps?) /bin will be a symlink to /usr/bin.
+
+> detailed info about /usr and its subfolders: [link](https://askubuntu.com/questions/130186/what-is-the-rationale-for-the-usr-directory)
 
 
 `/var` 的意义与内容:
