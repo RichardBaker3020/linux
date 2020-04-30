@@ -59,7 +59,26 @@ there
 ```
 `EOF` can be any word.
 
+### use redirection to make text file
+1. 
+```
+cat > outfile.txt
+>Enter text
+>to save press ctrl-d
+```
 
+2. 
+```
+cat > outfile.txt <<EOF
+>some text
+>to save
+>EOF
+```
+
+3. 
+```
+echo "Some text here." > myfile.txt
+```
 ### filter
 Filters
 Filters are commands that alter piped redirection and output. Note that filter commands are also standard Linux commands that can be used without pipes.

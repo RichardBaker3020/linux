@@ -37,6 +37,8 @@ killall prcname
 ```
 alias dtwt='syndaemon -d -i 1.0s'
 ```
+to remove alias:
+` unalias foo`
 
 ### pwd 
 ```
@@ -388,6 +390,14 @@ Use the -l option to list file name whose contents mention main():  grep -l 'mai
 
 ```
 
+### awk
+main use: Splits each input line into fields(*delimited by whitespace character by default* ) and display them respectively.
+
+1. `$ awk '{print}' employee.txt` work like **cat**
+2. `$ awk '/manager/ {print}' employee.txt ` work like **grep 'word' file.txt**, display line that contains given word.
+3. `$ awk '{print $1,$4}' employee.txt ` print first 1st and 4th field if possible, **$0** means all fileds.
+4. `$ awk '{print NR,$0}' employee.txt ` print lines with line number
+5. `$ awk 'NR==3, NR==6 {print NR,$0}' employee.txt ` print Lines From 3 to 6
 
 
 ### less

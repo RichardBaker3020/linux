@@ -39,7 +39,7 @@ j
 * dG	删除光标所在到最后一行的所有数据
 
 
-copy paste/ select
+copy cut paste/ select
 ---
 yy	复制游标所在的那一行(常用)
 p, P	p 为将已复制的数据在光标下一行贴上，P 则为贴在游标上一行！ 举例来说，我目前光标在第 20 行，且已经复制了 10 行数据。则按下 p 后， 那 10 行数据会贴在原本的 20 行之后，亦即由 21 行开始贴。但如果是按下 P 呢？ 那么原本的第 20 行会被推到变成 30 行。 (常用)
@@ -49,7 +49,7 @@ p, P	p 为将已复制的数据在光标下一行贴上，P 则为贴在游标�
 * V 列选择,会将光标经过的列反白选择!
 * [Ctrl]+v **区块选择**可以用长方形的方式选择数据
 * y 将反白的地方复制起来
-* d 将反白的地方删除掉
+* d 将反白的地方 cut
 * p 将刚刚复制的区块,在光标所在处贴上!
 
 
@@ -68,6 +68,7 @@ move cursor
 * G	移动到这个档案的最后一行(常用)
 * nG	n 为数字。移动到这个档案的第 n 行。例如 20G 则会移动到这个档案的第 20 行(可配合 :set nu)
 * gg	移动到这个档案的第一行 (常用)
+* go to particular line :  command mode and type number (:30) 
 * e : Move to the end of a word.
 * w : Move forward to the beginning of a word.
 	* nw
@@ -87,9 +88,31 @@ move cursor
 * [Ctrl] + [d]	屏幕『向下』移动半页
 * [Ctrl] + [u]	屏幕『向上』移动半页
 
-
 other
 ---
 * u   undo operation
+* ctrl+r redo
+
+### open multiple files
+ 我们可以使用 vim 后面同时接好几个文件来同时打开, 相关的按键有:
+ 编辑下一个文件 :n
+
+ 编辑上一个文件 :N
+
+ 列出目前这个 vim 的打开的所有文件 :files
 
 
+### tab several lines:
+[link](https://stackoverflow.com/questions/235839/indent-multiple-lines-quickly-in-vi)
+first, select block you wanna indent, and then use :
+the **>** command. To indent five lines, **5>>**. NOTE: this is angle brackets < >
+
+To mark a block of lines and indent it, Vjj> to indent three lines (Vim only). To indent a curly-braces block, put your cursor on one of the curly braces and use >% or from anywhere inside block use >iB.
+
+If you’re copying blocks of text around and need to align the indent of a block in its new location, use ]p instead of just p. This aligns the pasted block with the surrounding text.
+
+Also, the shiftwidth setting allows you to control how many spaces to indent.
+
+### show line number
+command mode (:set number)
+cancel  (:set nonumber)

@@ -20,6 +20,10 @@ systemd daemon unit type
 | .socket  |                                                                     |
 | .mount   |                                                                     |
 
+### .service
+to start a .service daemon on startup(you wanna run a script or a line of commmand when bootup), see vbird page 862.
+
+
 ### .timer 
 
 *e.g. 固定周期运行 .tmer*
@@ -67,3 +71,4 @@ daemon directory
 * `/etc/systemd/system/` :管理员依据主机系统的需求所创建的执行脚本, 执行优先序又比 /run/systemd/system/ 高
 
 > 系统开机会不会执行服务其实是看 /etc/systemd/system/ 下面的设置,所以该目录下面a bunch of链接文件。而实际执行的 systemd 启动脚本配置文件, 都是放置在 /lib/systemd/system/ ,如果想要修改某个服务启动的设置,要去 /lib/systemd/system/ 下面修改, /etc/systemd/system/ 仅是链接到正确的执行脚本配置文件而已。想要看执行脚本设置,应该要到 /lib/systemd/system/查阅
+
