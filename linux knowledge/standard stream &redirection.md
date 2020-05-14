@@ -48,10 +48,10 @@ It passes the word on the right to the standard input of the command on the left
 
 sometimes here string is better than pipe, cause introducing a pipe means the latter commands run in subshells and some variables might lose when back to parent shell. [link](https://unix.stackexchange.com/questions/80362/what-does-mean)
 
-**<<** denotes a here document. tutorial: [link](https://bash.cyberciti.biz/guide/Here_documents)
+**<<** denotes a *here document*. tutorial: [link](https://bash.cyberciti.biz/guide/Here_documents)
 ```
 $ cat <<EOF
-> hi
+> hiE
 > there
 > EOF
 hi
