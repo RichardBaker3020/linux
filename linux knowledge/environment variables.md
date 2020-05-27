@@ -1,6 +1,6 @@
 environment variables
 ===
-[link](note://2_other_useful_command)
+[link](note://2_other_commands)
 
 “环境变量”的【可见性】和【可继承性】
 ---
