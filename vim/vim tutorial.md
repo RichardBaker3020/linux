@@ -128,3 +128,5 @@ comment a block of text:
 
 uncomment:
 Put your cursor on the first # character, press **Ctrl+V**, and go down until the last commented line and press **x**
+
+### auto complete
