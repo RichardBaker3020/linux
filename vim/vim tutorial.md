@@ -130,3 +130,4 @@ uncomment:
 Put your cursor on the first # character, press **Ctrl+V**, and go down until the last commented line and press **x**
 
 ### auto complete
+Use `Ctrl-N` to get a list of word suggestions while in insert mode.
