@@ -132,4 +132,5 @@ Put your cursor on the first # character, press **Ctrl+V**, and go down until th
 ### auto complete
 Use `Ctrl-N` to get a list of word suggestions while in insert mode.
 
-#
+### show file path
+ctrl + G
