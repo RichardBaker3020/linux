@@ -18,6 +18,7 @@ file types and extension
 2. 目录(directory): 就是目录啰~第一个属性为 [ d ]
 3. 链接文件(link): 类似Windows系统下面的捷径, 第一个属性为 [ l ]例如 [lrwxrwxrwx] 
 4. others: device, sockets, FIFO
+5. 设备文件： 
 
 
 permission for file
