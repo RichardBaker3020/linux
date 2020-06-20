@@ -134,3 +134,4 @@ Use `Ctrl-N` to get a list of word suggestions while in insert mode.
 
 ### show file path
 `ctrl + G`
+
