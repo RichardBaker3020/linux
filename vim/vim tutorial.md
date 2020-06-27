@@ -82,7 +82,7 @@ move cursor
 * { Jump backward one paragraph.
 * ` '.`  Jump to the last-changed line.
 * `` Return to the cursor position before the latest jump (undo the jump). Two back ticks. 
-* `g;` move back cursor history, 
+* `g;` move back cursor history,  `g,` move forward
 
 * [Ctrl] + [f]	屏幕『向下』移动一页，相当于 [Page Down]按键 (常用)
 * [Ctrl] + [b]	屏幕『向上』移动一页，相当于 [Page Up] 按键 (常用)
