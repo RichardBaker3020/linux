@@ -60,6 +60,8 @@ replace and find
 * n	这个 n 是英文按键。代表重复前一个搜寻的动作。
 * N	这个 N 是英文按键。与 n 刚好相反，为『反向』进行前一个搜寻动作。
 
+
+
 move cursor
 ---
 * j, k, h, l
