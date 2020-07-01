@@ -62,7 +62,8 @@ replace and find
 
 * `:s/foo/bar/g`  Find each occurrence of 'foo' (in the *current* line only), and replace it with 'bar'
     * `%` means all lines: `:%s/foo/bar/g` replace in *all* lines
-    *  `:5,12s/foo/bar/g`	Change each 'foo' to 'bar' for all lines from line 5 to line 12 (inclusive).
+    *  `:5,12s/foo/bar/g`	Change from line 5 to line 12 (inclusive).
+    *  `:.,$s/foo/bar/g`	Change from current line (.) to the last line ($) inclusive.
     * `c` means confirme: `:%s/\<foo\>/bar/gc` asks for confirmation
     * `i` means case insensitive, `I` means case sensitive: `:%s/foo/bar/gci`, `:%s/foo/bar/gcI`
     *  `:%s/\<foo\>/bar/gc` means replace words *exactly* matching `foo` , here escape `<`
