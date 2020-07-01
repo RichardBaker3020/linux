@@ -61,7 +61,7 @@ replace and find
 * N	这个 N 是英文按键。与 n 刚好相反，为『反向』进行前一个搜寻动作。
 
 * `:s/foo/bar/g`  Find each occurrence of 'foo' (in the *current* line only), and replace it with 'bar'
-    * `%` means all lines: `:%s/foo/bar/g` replace in 
+    * `%` means all lines: `:%s/foo/bar/g` replace in *all* lines
 
 move cursor
 ---
