@@ -57,8 +57,8 @@ replace and find
 ---
 * /word	向光标之下寻找一个名称为 word 的字符串。and then press Enter to move cursor to the word postion.
 * ?word	向光标之上寻找一个字符串名称为 word 的字符串。
-* n	这个 n 是英文按键。代表重复前一个搜寻的动作。
-* N	这个 N 是英文按键。与 n 刚好相反，为『反向』进行前一个搜寻动作。
+* n	代表重复前一个搜寻的动作。
+* N	与 n 刚好相反，为『反向』进行前一个搜寻动作。
 
 * `:s/foo/bar/g`  Find each occurrence of 'foo' (in the *current* line only), and replace it with 'bar'
     * `%` means all lines: `:%s/foo/bar/g` replace in *all* lines
