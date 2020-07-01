@@ -64,7 +64,7 @@ replace and find
     * `%` means all lines: `:%s/foo/bar/g` replace in *all* lines
     * `c` means confirme: `:%s/\<foo\>/bar/gc` asks for confirmation
     * `i` means case insensitive, `I` means case sensitive: `:%s/foo/bar/gci`, `:%s/foo/bar/gcI`
-    *  `:%s/\foo\>/bar/gc` means replace words exactly matching `foo` , here escape <>
+    *  `:%s/\<foo\>/bar/gc` means replace words exactly matching `foo` , here escape `<`
 
 move cursor
 ---
