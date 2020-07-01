@@ -62,6 +62,7 @@ replace and find
 
 * `:s/foo/bar/g`  Find each occurrence of 'foo' (in the *current* line only), and replace it with 'bar'
     * `%` means all lines: `:%s/foo/bar/g` replace in *all* lines
+    * `c` means confirme: `:%s/\<foo\>/bar/gc` asks for confirmation
     * 
 
 move cursor
