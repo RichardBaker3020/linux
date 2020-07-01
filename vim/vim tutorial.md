@@ -57,8 +57,8 @@ replace and find
 ---
 * /word	向光标之下寻找一个名称为 word 的字符串。and then press Enter to move cursor to the word postion.
 * ?word	向光标之上寻找一个字符串名称为 word 的字符串。
-* n	这个 n 是英文按键。代表重复前一个搜寻的动作。举例来说， 如果刚刚我们执行 /vbird 去向下搜寻 vbird 这个字符串，则按下 n 后，会向下继续搜寻下一个名称为 vbird 的字符串。如果是执行 ?vbird 的话，那么按下 n 则会向上继续搜寻名称为 vbird 的字符串！
-* N	这个 N 是英文按键。与 n 刚好相反，为『反向』进行前一个搜寻动作。 例如 /vbird 后，按下 N 则表示『向上』搜寻 vbird 。
+* n	这个 n 是英文按键。代表重复前一个搜寻的动作。
+* N	这个 N 是英文按键。与 n 刚好相反，为『反向』进行前一个搜寻动作。
 
 move cursor
 ---
