@@ -122,6 +122,7 @@ If you’re copying blocks of text around and need to align the indent of a bloc
 
 Also, the shiftwidth setting allows you to control how many spaces to indent.
 
+Note: if you want to indent 
 ### show line number
 command mode (:set number)
 cancel  (:set nonumber)
