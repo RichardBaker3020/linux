@@ -94,6 +94,16 @@ move cursor
 * ` '.`  Jump to the last-changed line.
 * `` Return to the cursor position before the latest jump (undo the jump). Two back ticks. 
 * `g;` move back cursor history,  `g,` move forward
+* `fo` to go to the first '`o`'(`to` is like this but a bit different):
+```
+The quick brown fox jumps over the lazy dog.
+            ^
+```
+and then `;` to go to the next one:
+```
+The quick brown fox jumps over the lazy dog.
+                 ^
+```
 
 * [Ctrl] + [f]	屏幕『向下』移动一页，相当于 [Page Down]按键 (常用)
 * [Ctrl] + [b]	屏幕『向上』移动一页，相当于 [Page Up] 按键 (常用)
