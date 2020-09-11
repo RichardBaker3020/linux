@@ -10,3 +10,8 @@ Asterisk (*) is used to search for particular character(s) for zero or more time
 
 Using OR patterns in shell wildcards
 ---
+```
+for i in ./*.(url|jpg|txt) ;do
+    echo "$i"
+done
+```
