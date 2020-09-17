@@ -94,6 +94,7 @@ move cursor
 * ` '.`  Jump to the last-changed line.
 * `` Return to the cursor position before the latest jump (undo the jump). Two back ticks. 
 * `g;` move back cursor history,  `g,` move forward
+* `+` move to the beginning of next line
 * `fo` to go to the first '`o`'(`to` is like this but a bit different):
 ```
 The quick brown fox jumps over the lazy dog.
