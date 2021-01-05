@@ -39,6 +39,11 @@ index and slice
 `echo ${var:0}` get characters from 1th character up to the last one.
 `echo ${var:0:2}` get chars from 1th up to next two.
 
+```sh
+
+${f:0:-2}
+```
+
 get position
 ---
 ```
