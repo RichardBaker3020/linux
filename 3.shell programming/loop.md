@@ -35,6 +35,15 @@ do
 done
 ```
 
+loop through files in current dir:
+```sh
+#!/bin/bash
+
+for name in *.flv; do
+  ffmpeg -i "$name" -c copy "${name%.*}.mp4" 
+done
+```
+
 break/continue
 ---
 use break, continue and if statements to break out of a loop.
