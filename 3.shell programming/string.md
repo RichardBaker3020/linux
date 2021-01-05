@@ -44,6 +44,15 @@ index and slice
 ${f:0:-2}
 ```
 
+Last three characters of `string`:
+``` lang-sh
+${string: -3}
+```
+or
+``` lang-sh
+${string:(-3)}
+```
+
 get position
 ---
 ```
